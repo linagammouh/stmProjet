@@ -26,6 +26,7 @@ public class TP1 {
         // variables pour la navette
         String navette;
         char chNavette;
+        int tickets =0;
 
 // menu principal
 do {
@@ -390,7 +391,7 @@ do {
             System.out.println(BLUE + "│    4 -      3 jours                     20$  │" + RESET);
             System.out.println(RED + "│    Q -      Quitter                          │" + RESET);
             System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
-        int tickets =0;
+
             do {//boucle menu soirees
                 System.out.println("Choisissez le type de titre : ");
                 Soirees = sc.nextLine();
@@ -505,11 +506,9 @@ do {
                 }// fin condition navette
             } while (true);
 
-            if (chNavette != 'q' && chNavette != 'Q' ) {
-                continue;
-            }
-            if(chNavette != 'q' || chNavette != 'Q')
-            do {
+
+            if (chNavette != 'Q' && chNavette != 'q') {
+                do {
                     System.out.println("Choisissez le nombre de tickets voulus : ");
                     tickets = sc.nextInt();
                     if (tickets > 0) {
@@ -517,24 +516,30 @@ do {
                         break;
                     }
                     System.out.println("Choiz invalide !");
-                } while (true);// fin boucle tickets navette
+                } while (true); // fin boucle tickets
+            }
 
+            switch (chNavette) {
+                case '1':
 
-            double prixnavette = 10.00;
-            double prixnavetteTaxe = ((prixnavette * TPS) + (prixnavette * TVQ) + prixnavette) * tickets;
-            double Tpsprixnavette = TPS * prixnavette;
-            double Tvqprixnavette = TVQ * prixnavette;
-            System.out.println("Aucune réduction applicable :");
-            System.out.println("Type               : Navette");
-            System.out.println("Prix à payer       : " + prixnavette + "$");
-            System.out.println("Nombre de tickets  : " + tickets);
-            System.out.println("TPS                : " + Tpsprixnavette + "$");
-            System.out.println("TVQ                : " + Tvqprixnavette + "$");
-            System.out.println("----------------------------------------");
-            System.out.println("Prix avec taxes    : " + prixnavetteTaxe + "$");
+                    double prixnavette = 10.00;
+                    double prixnavetteTaxe = ((prixnavette * TPS) + (prixnavette * TVQ) + prixnavette) * tickets;
+                    double Tpsprixnavette = TPS * prixnavette;
+                    double Tvqprixnavette = TVQ * prixnavette;
+                    System.out.println("Aucune réduction applicable :");
+                    System.out.println("Type               : Navette");
+                    System.out.println("Prix à payer       : " + prixnavette + "$");
+                    System.out.println("Nombre de tickets  : " + tickets);
+                    System.out.println("TPS                : " + Tpsprixnavette + "$");
+                    System.out.println("TVQ                : " + Tvqprixnavette + "$");
+                    System.out.println("----------------------------------------");
+                    System.out.println("Prix avec taxes    : " + prixnavetteTaxe + "$");
 
-            break;// fin navette menu principal
-
+                    break;// fin navette menu principal
+                case 'q':
+                case 'Q':
+                    return;
+            }//fin switch navette
 
     }//fin switch menu choix de titres
 
