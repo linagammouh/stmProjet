@@ -505,6 +505,10 @@ do {
                 }// fin condition navette
             } while (true);
 
+            if (chNavette != 'q' && chNavette != 'Q' ) {
+                continue;
+            }
+            if(chNavette != 'q' || chNavette != 'Q')
             do {
                     System.out.println("Choisissez le nombre de tickets voulus : ");
                     tickets = sc.nextInt();
