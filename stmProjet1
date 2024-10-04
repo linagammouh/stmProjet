@@ -1,0 +1,542 @@
+import java.util.Scanner;
+public class TP1 {
+    //couleurs
+    public static final String RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String RED = "\u001B[31m";
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+//DEBUT
+
+// declaration des variables
+        final double TPS = 0.05;
+        final double TVQ = 0.10;
+        // menu principal variables
+        char chchoixTitre= ' ';
+        String choixTitre;
+        // menu passages variables
+        String passages;
+        char chPassages=' ';
+        // variables pour la reduction
+        String reduction;
+        char chReduction=' ';
+        // variables pour la navette
+        String navette;
+        char chNavette;
+
+// menu principal
+do {
+    System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+    System.out.println(YELLOW + "│       Catégorie des Titres de transport :    │" + RESET);
+    System.out.println(BLUE + "│          Choisissez une catégorie            │" + RESET);
+    System.out.println(YELLOW + "│──────────────────────────────────────────────│" + RESET);
+    System.out.println(BLUE + "│ P    Passages                                │" + RESET);
+    System.out.println(BLUE + "│ S    Soirées : journées ou Fin de semaine    │" + RESET);
+    System.out.println(BLUE + "│ N    Navette Aéroport                        │" + RESET);
+    System.out.println(RED + "│ Q    Quitter                                 │" + RESET);
+    System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+    do {// premiere boucle
+        System.out.println("Choisissez une catégorie d'abonnement :  ");
+        choixTitre = sc.nextLine();
+
+        if (!choixTitre.isEmpty()) {//condition 1 menu principal
+            chchoixTitre = choixTitre.charAt(0);
+            if (chchoixTitre == 'P' || chchoixTitre == 'S' || chchoixTitre == 'N' ||
+                    chchoixTitre == 'Q' || chchoixTitre == 'p' || chchoixTitre == 's' || chchoixTitre == 'n'
+                    || chchoixTitre == 'q') {//condition 2 menu principal
+                break;
+            }//fin  condition 1 menu principal
+        }//fin condition menu principal
+        System.out.println("Choix de catégorie erroné!");
+    } while (true);// fin boucle menu principal
+
+
+    switch (chchoixTitre) { // choix des titres menu principal
+        case 'P':
+        case 'p':
+            System.out.println(BLUE + "┌──────────────────────────────────────────────────────┐" + RESET);
+            System.out.println(BLUE + "│                    Bienvenue à la STM                │" + RESET);
+            System.out.println(BLUE + "│                        Passages                      │" + RESET);
+            System.out.println(BLUE + "│     Choisissez le nombre de passages (tickets):      │" + RESET);
+            System.out.println(BLUE + "├──────────────────────────────────────────────────────┤" + RESET);
+            System.out.println(BLUE + "│  1-      1 passage             3,50$                 │" + RESET);
+            System.out.println(BLUE + "│  2-      2 passages            6,50$                 │" + RESET);
+            System.out.println(BLUE + "│  3-     10 passages           30,00$                 │" + RESET);
+            System.out.println(RED + "│  Q-      quitter                                     │" + RESET);
+            System.out.println(BLUE + "└──────────────────────────────────────────────────────┘" + RESET);
+
+            do {// boucle menu passages
+                System.out.println("Choisissez un nombre de passages : ");
+                passages = sc.nextLine();
+                if (!passages.isEmpty()) {//condition 1 menu passages
+                    chPassages = passages.charAt(0);
+                    if (chPassages == '1' || chPassages == '2' || chPassages == '3' ||
+                            chPassages == 'q' || chPassages == 'Q') {
+                        break;
+                    }
+                }// fin condition 1 menu passages
+                System.out.println(RED + "Choix invalide" + RESET);
+            } while (true); // fin boucle menu passages
+
+
+            switch (chPassages) {
+                case '1': // choix pour 1 passage
+
+                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+                    do {// debut boucle reduction
+                        System.out.print("Choisissez le type de réduction,");
+                        reduction = sc.nextLine();
+                        if (!reduction.isEmpty()) {
+                            chReduction = reduction.charAt(0);
+                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                    || chReduction == '3') {
+                                break;
+                            }
+                        }// fin condition boucle reduction
+
+                        System.out.println("Désolé, Nous n’avons pas ce type de choix!");
+                    } while (true); // fin boucle reduction
+
+                    switch (chReduction) {
+                        case '1':// 1 passage et enfant
+                            double prixEnfant = 2.50;
+                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant);
+                            double TpsprixEnfant = TPS * prixEnfant;
+                            double TvqprixEnfant = TVQ * prixEnfant;
+                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Enfant");
+                            System.out.println("Prix à payer       : " + prixEnfant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEnfant + "$");
+                            System.out.println("TVQ                : " + TvqprixEnfant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEnfantTaxe + "$");
+                            break;// 1 passage et enfant fin
+
+                        case '2':// 1 passage et étudiant
+                            double prixEtudiant = 2.50;
+                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant);
+                            double TpsprixEtudiant = TPS * prixEtudiant;
+                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Étudiant");
+                            System.out.println("Prix à payer       : " + prixEtudiant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEtudiant + "$");
+                            System.out.println("TVQ                : " + TvqprixEtudiant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEtudiantTaxe + "$");
+                            break;// 1 passage et étudiant fin
+
+                        case '3':// 1 passage et 65+
+                            double prixAine = 1.00;
+                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine);
+                            double TpsprixAine = TPS * prixAine;
+                            double TvqprixAine = TVQ * prixAine;
+                            System.out.println("En tant que senior, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : 65+");
+                            System.out.println("Prix à payer       : " + prixAine + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixAine + "$");
+                            System.out.println("TVQ                : " + TvqprixAine + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixAineTaxe + "$");
+                            break;// 1 passage et 65+ fin
+
+                        case 'a':
+                        case 'A':
+                            double prixReg = 3.50;// sans remise, donc regulier
+                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg);
+                            double TpsprixReg = TPS * prixReg;
+                            double TvqprixReg = TVQ * prixReg;
+                            System.out.println("Aucune réduction applicable :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : aucune réduction");
+                            System.out.println("Prix à payer       : " + prixReg + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixReg + "$");
+                            System.out.println("TVQ                : " + TvqprixReg + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixRegTaxe + "$");
+                            break; // 1 passage et sans remise fin
+
+                    }// fin 1 passage reduction switch
+                    break;// fin choix 1 passage
+
+
+                case '2':// choix pour 2 passages
+
+                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+                    System.out.print("Choisissez le type de réduction.");
+                    do {// debut boucle reduction
+                        System.out.print("Choisissez le type de réduction A pour aucune et Q pour quitter le programme : ");
+                        reduction = sc.nextLine();
+                        if (!reduction.isEmpty()) {
+                            chReduction = reduction.charAt(0);
+                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                    || chReduction == '3') {
+                                break;
+                            }
+                        }// fin condition boucle reduction
+
+                        System.out.println("Désolé, Nous n’avons pas ce type de choix!");
+                        System.out.println("Reessayez : ");
+                    } while (true); // fin boucle reduction
+
+                    switch (chReduction) {
+                        case '1':// 2 passages et enfant
+                            double prixEnfant = 4.25;
+                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant);
+                            double TpsprixEnfant = TPS * prixEnfant;
+                            double TvqprixEnfant = TVQ * prixEnfant;
+                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Enfant");
+                            System.out.println("Prix à payer       : " + prixEnfant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEnfant + "$");
+                            System.out.println("TVQ                : " + TvqprixEnfant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEnfantTaxe + "$");
+                            break;// 2 passages et enfant fin
+
+                        case '2':// 2 passages et étudiant
+                            double prixEtudiant = 4.25;
+                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant);
+                            double TpsprixEtudiant = TPS * prixEtudiant;
+                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Étudiant");
+                            System.out.println("Prix à payer       : " + prixEtudiant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEtudiant + "$");
+                            System.out.println("TVQ                : " + TvqprixEtudiant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEtudiantTaxe + "$");
+                            break;// 2 passages et étudiant fin
+
+                        case '3':// 2 passages et 65+
+                            double prixAine = 2.00;
+                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine);
+                            double TpsprixAine = TPS * prixAine;
+                            double TvqprixAine = TVQ * prixAine;
+                            System.out.println("En tant que senior, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : 65+");
+                            System.out.println("Prix à payer       : " + prixAine + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixAine + "$");
+                            System.out.println("TVQ                : " + TvqprixAine + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixAineTaxe + "$");
+                            break;// 2 passages et 65+ fin
+
+                        case 'a':
+                        case 'A':
+                            double prixReg = 6.50;// sans remise, donc regulier
+                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg);
+                            double TpsprixReg = TPS * prixReg;
+                            double TvqprixReg = TVQ * prixReg;
+                            System.out.println("Aucune réduction applicable :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : aucune réduction");
+                            System.out.println("Prix à payer       : " + prixReg + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixReg + "$");
+                            System.out.println("TVQ                : " + TvqprixReg + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixRegTaxe + "$");
+                            break; // 2 passages et sans remise fin
+
+                    }// fin 2 passages switch choix reduction
+
+                    break;// choix 2
+                case '3':// choix pour 10 passages
+
+                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+
+                    do {// debut boucle reduction
+                        System.out.print("Choisissez le type de réduction. ");
+                        reduction = sc.nextLine();
+                        if (!reduction.isEmpty()) {
+                            chReduction = reduction.charAt(0);
+                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                    || chReduction == '3') {
+                                break;
+                            }
+                        }// fin condition boucle reduction
+
+                        System.out.println("Désolé, Nous n’avons pas ce type de choix!");
+                    } while (true); // fin boucle reduction
+
+                    switch (chReduction) {
+                        case '1':// 10 passages et enfant
+                            double prixEnfant = 19.00;
+                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant);
+                            double TpsprixEnfant = TPS * prixEnfant;
+                            double TvqprixEnfant = TVQ * prixEnfant;
+                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Enfant");
+                            System.out.println("Prix à payer       : " + prixEnfant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEnfant + "$");
+                            System.out.println("TVQ                : " + TvqprixEnfant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEnfantTaxe + "$");
+                            break;// 2 passages et enfant fin
+
+                        case '2':// 10 passages et étudiant
+                            double prixEtudiant = 19.00;
+                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant);
+                            double TpsprixEtudiant = TPS * prixEtudiant;
+                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : Étudiant");
+                            System.out.println("Prix à payer       : " + prixEtudiant + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixEtudiant + "$");
+                            System.out.println("TVQ                : " + TvqprixEtudiant + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixEtudiantTaxe + "$");
+                            break;// 2 passages et étudiant fin
+
+                        case '3':// 2 passages et 65+
+                            double prixAine = 9.00;
+                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine);
+                            double TpsprixAine = TPS * prixAine;
+                            double TvqprixAine = TVQ * prixAine;
+                            System.out.println("En tant que senior, voici votre réduction :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : 65+");
+                            System.out.println("Prix à payer       : " + prixAine + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixAine + "$");
+                            System.out.println("TVQ                : " + TvqprixAine + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixAineTaxe + "$");
+                            break;// 2 passages et 65+ fin
+
+                        case 'a':
+                        case 'A':// 10 passages et sans remise
+                            double prixReg = 30.00;// sans remise, donc regulier
+                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg);
+                            double TpsprixReg = TPS * prixReg;
+                            double TvqprixReg = TVQ * prixReg;
+                            System.out.println("Aucune réduction applicable :");
+                            System.out.println("Type               : 1 passage");
+                            System.out.println("Réduction          : aucune réduction");
+                            System.out.println("Prix à payer       : " + prixReg + "$");
+                            System.out.println("Nombre de tickets  : 1 ");
+                            System.out.println("TPS                : " + TpsprixReg + "$");
+                            System.out.println("TVQ                : " + TvqprixReg + "$");
+                            System.out.println("----------------------------------------");
+                            System.out.println("Prix avec taxes    : " + prixRegTaxe + "$");
+                            break; // 2 passages et sans remise fin
+
+                    } // fin 10 passages switch reduction
+                    break; // choix 3
+
+            } // fin switch passages
+            break;
+
+        case 'S':
+        case 's':
+            String Soirees;
+            char chSoirees;
+            System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+            System.out.println(BLUE + "│              Bienvenue à la STM              │" + RESET);
+            System.out.println(BLUE + "│──────────────────────────────────────────────│" + RESET);
+            System.out.println(BLUE + "│      Soirées : journées ou Fin de semaine    │" + RESET);
+            System.out.println(BLUE + "│    1 -      Soirées illimitées           5$  │" + RESET);
+            System.out.println(BLUE + "│    2 -      1 jour                      10$  │" + RESET);
+            System.out.println(BLUE + "│    3 -      Weekend illimité            14$  │" + RESET);
+            System.out.println(BLUE + "│    4 -      3 jours                     20$  │" + RESET);
+            System.out.println(RED + "│    Q -      Quitter                          │" + RESET);
+            System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+        int tickets =0;
+            do {//boucle menu soirees
+                System.out.println("Choisissez le type de titre : ");
+                Soirees = sc.nextLine();
+                if (!Soirees.isEmpty()) {
+                    chSoirees = Soirees.charAt(0);
+                    if (chSoirees == '1' || chSoirees == '2' || chSoirees == '3' || chSoirees == '4'
+                        || chSoirees == 'Q' || chSoirees == 'q') {
+                        break;}
+                }// fin condition 1 menu soirees
+                System.out.println(RED + "Choix invalide" + RESET);
+            } while (true);// fin boucle menu soirees
+
+            if (chSoirees != 'Q' && chSoirees != 'q') {
+                do {
+                    System.out.println("Choisissez le nombre de tickets voulus : ");
+                    tickets = sc.nextInt();
+                    if (tickets > 0) {
+                        System.out.println("Vous aviez choisi : " + tickets + " tickets.");
+                        break;
+                    }
+                    System.out.println("Choiz invalide !");
+                } while (true); // fin boucle tickets
+            }// fin condition tickets
+
+
+
+
+
+            switch (chSoirees) {
+
+                case '1'://choix soiree illimitee
+                    double prixIllimite = 5.00;
+                    double prixIllimiteTaxe = ((prixIllimite * TPS) + (prixIllimite * TVQ) + prixIllimite) * tickets;
+                    double TpsprixIllimite = TPS * prixIllimite;
+                    double TvqprixIllimite = TVQ * prixIllimite;
+                    System.out.println("Aucune réduction applicable :");
+                    System.out.println("Type               : Soiree Illimitee");
+                    System.out.println("Prix à payer       : " + prixIllimite + "$");
+                    System.out.println("Nombre de tickets  : " + tickets);
+                    System.out.println("TPS                : " + TpsprixIllimite + "$");
+                    System.out.println("TVQ                : " + TvqprixIllimite + "$");
+                    System.out.println("----------------------------------------");
+                    System.out.println("Prix avec taxes    : " + prixIllimiteTaxe + "$");
+                    break;
+                case '2':// 1 jour
+                    double prix1jour = 10.00;
+                    double prix1jourTaxe = ((prix1jour * TPS) + (prix1jour * TVQ) + prix1jour) * tickets;
+                    double Tpsprix1jour = TPS * prix1jour;
+                    double Tvqprix1jour = TVQ * prix1jour;
+                    System.out.println("Aucune réduction applicable :");
+                    System.out.println("Type               : 1 jour");
+                    System.out.println("Prix à payer       : " + prix1jour + "$");
+                    System.out.println("Nombre de tickets  : " + tickets);
+                    System.out.println("TPS                : " + Tpsprix1jour + "$");
+                    System.out.println("TVQ                : " + Tvqprix1jour + "$");
+                    System.out.println("----------------------------------------");
+                    System.out.println("Prix avec taxes    : " + prix1jourTaxe + "$");
+                    break;
+                case '3'://weekend illimite
+                    double prixweekend = 14.00;
+                    double prixweekendTaxe = ((prixweekend * TPS) + (prixweekend * TVQ) + prixweekend) * tickets;
+                    double Tpsprixweekend = TPS * prixweekend;
+                    double Tvqprixweekend = TVQ * prixweekend;
+                    System.out.println("Aucune réduction applicable :");
+                    System.out.println("Type               : weekend illimite");
+                    System.out.println("Prix à payer       : " + prixweekend + "$");
+                    System.out.println("Nombre de tickets  : " + tickets);
+                    System.out.println("TPS                : " + Tpsprixweekend + "$");
+                    System.out.println("TVQ                : " + Tvqprixweekend + "$");
+                    System.out.println("----------------------------------------");
+                    System.out.println("Prix avec taxes    : " + prixweekendTaxe + "$");
+                    break;
+                case '4'://3jours
+                    double prix3Jours = 20.00;
+                    double prix3JoursTaxe = ((prix3Jours * TPS) + (prix3Jours * TVQ) + prix3Jours) * tickets;
+                    double Tpsprix3Jours = TPS * prix3Jours;
+                    double Tvqprix3Jours = TVQ * prix3Jours;
+                    System.out.println("Aucune réduction applicable :");
+                    System.out.println("Type               : 3 jours");
+                    System.out.println("Prix à payer       : " + prix3Jours + "$");
+                    System.out.println("Nombre de tickets  : " + tickets);
+                    System.out.println("TPS                : " + Tpsprix3Jours + "$");
+                    System.out.println("TVQ                : " + Tvqprix3Jours + "$");
+                    System.out.println("----------------------------------------");
+                    System.out.println("Prix avec taxes    : " + prix3JoursTaxe + "$");
+                    break;
+
+
+            }// fin switch soirees
+            break;
+
+        case 'n':// choix navette menu principal
+        case 'N':
+            System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+            System.out.println(BLUE + "│              Bienvenue à la STM              │" + RESET);
+            System.out.println(BLUE + "│──────────────────────────────────────────────│" + RESET);
+            System.out.println(BLUE + "│      Soirées : journées ou Fin de semaine    │" + RESET);
+            System.out.println(BLUE + "│    1 -      Navette               10$        │" + RESET);
+            System.out.println(RED + "│    Q -      Quitter                          │" + RESET);
+            System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+
+
+
+            do {
+                System.out.println("Choisissez votre passage ou quittez : ");
+                navette = sc.nextLine();
+                if (!navette.isEmpty()) {
+                    chNavette = navette.charAt(0);
+                    if (chNavette == 1 || chNavette == 'q' || chNavette == 'Q') {
+                        break;
+                    }
+                }// fin condition navette
+            } while (true);
+
+            do {
+                    System.out.println("Choisissez le nombre de tickets voulus : ");
+                    tickets = sc.nextInt();
+                    if (tickets > 0) {
+                        System.out.println("Vous aviez choisi : " + tickets + " tickets.");
+                        break;
+                    }
+                    System.out.println("Choiz invalide !");
+                } while (true);// fin boucle tickets navette
+
+
+            double prixnavette = 10.00;
+            double prixnavetteTaxe = ((prixnavette * TPS) + (prixnavette * TVQ) + prixnavette) * tickets;
+            double Tpsprixnavette = TPS * prixnavette;
+            double Tvqprixnavette = TVQ * prixnavette;
+            System.out.println("Aucune réduction applicable :");
+            System.out.println("Type               : Navette");
+            System.out.println("Prix à payer       : " + prixnavette + "$");
+            System.out.println("Nombre de tickets  : " + tickets);
+            System.out.println("TPS                : " + Tpsprixnavette + "$");
+            System.out.println("TVQ                : " + Tvqprixnavette + "$");
+            System.out.println("----------------------------------------");
+            System.out.println("Prix avec taxes    : " + prixnavetteTaxe + "$");
+
+            break;// fin navette menu principal
+
+
+    }//fin switch menu choix de titres
+
+}while (chchoixTitre == 'q' || chPassages == 'q' ||chReduction == 'q'); // fin boucle while du menu principal
+//fin
+
+
+        }//fin psvm
+}//fin public class
