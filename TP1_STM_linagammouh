@@ -1,0 +1,1380 @@
+import java.text.DecimalFormat;
+import java.util.Scanner;
+ public class TP1 { 
+     //couleurs
+     public static final String RESET = "\u001B[0m";
+     public static final String BLUE = "\u001B[34m";
+     public static final String GREEN = "\u001B[32m";
+     public static final String YELLOW = "\u001B[33m";
+     public static final String RED = "\u001B[31m";
+     public static void main(String[] args) {
+     // Scanner
+         Scanner sc = new Scanner(System.in);
+         // Pour rendre l'argent en décimal
+         DecimalFormat decimal = new DecimalFormat("0.00");
+//DÉBUT
+
+// déclaration des variables
+         final double TPS = 0.05;
+         final double TVQ = 0.10;
+         // menu principal variables
+         char chchoixTitre = ' ';
+         String choixTitre;
+         // menu passages variables
+         String passages;
+         char chPassages = ' ';
+         // variables pour la réduction
+         String reduction;
+         char chReduction = ' ';
+         // variables pour la navette
+         String navette;
+         char chNavette= ' ';
+         int tickets = 0;
+         //variables pour les soirées
+         char chSoirees = ' ';
+         String Soirees;
+         // prix final
+         double prixfinal = 0;
+         //montant donné du client
+         double montantClient=0;
+         // le change
+         double change = 0;
+         // décimal
+         DecimalFormat df = new DecimalFormat("0.00");
+         //input
+         String input;
+
+                                            // menu principal
+                                             do {
+                                                    System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+                                                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                                                    System.out.println(YELLOW + "│       Catégorie des Titres de transport :    │" + RESET);
+                                                    System.out.println(BLUE + "│          Choisissez une catégorie            │" + RESET);
+                                                    System.out.println(YELLOW + "│──────────────────────────────────────────────│" + RESET);
+                                                    System.out.println(BLUE + "│ P    Passages                                │" + RESET);
+                                                    System.out.println(BLUE + "│ S    Soirées : journées ou Fin de semaine    │" + RESET);
+                                                    System.out.println(BLUE + "│ N    Navette Aéroport                        │" + RESET);
+                                                    System.out.println(RED + "│ Q    Quitter                                 │" + RESET);
+                                                    System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+                                                    do {// premiere boucle
+                                                        System.out.println("Choisissez une catégorie d'abonnement :  ");
+                                                        choixTitre = sc.nextLine();
+
+                                                        if (!choixTitre.isEmpty() && choixTitre.length()==1) {//condition 1 menu principal
+                                                            chchoixTitre = choixTitre.charAt(0);
+                                                            if (chchoixTitre == 'P' || chchoixTitre == 'S' || chchoixTitre == 'N' ||
+                                                                    chchoixTitre == 'Q' || chchoixTitre == 'p' || chchoixTitre == 's' || chchoixTitre == 'n'
+                                                                    || chchoixTitre == 'q') {//condition 2 menu principal
+                                                                break;
+                                                            }//fin  condition 1 menu principal
+                                                        }//fin condition menu principal
+                                                        System.out.println(RED+"Choix de catégorie erroné!"+RESET);
+                                                    } while (true);// fin boucle menu principal
+
+
+                                                    switch (chchoixTitre) { // choix des titres menu principal
+                                                        case 'P':
+                                                        case 'p':
+                                                            System.out.println(BLUE + "┌──────────────────────────────────────────────────────┐" + RESET);
+                                                            System.out.println(BLUE + "│                    Bienvenue à la STM                │" + RESET);
+                                                            System.out.println(BLUE + "│                        Passages                      │" + RESET);
+                                                            System.out.println(BLUE + "│     Choisissez le nombre de passages (tickets):      │" + RESET);
+                                                            System.out.println(BLUE + "├──────────────────────────────────────────────────────┤" + RESET);
+                                                            System.out.println(BLUE + "│  1-      1 passage             3,50$                 │" + RESET);
+                                                            System.out.println(BLUE + "│  2-      2 passages            6,50$                 │" + RESET);
+                                                            System.out.println(BLUE + "│  3-     10 passages           30,00$                 │" + RESET);
+                                                            System.out.println(RED + "│  Q-      quitter                                     │" + RESET);
+                                                            System.out.println(BLUE + "└──────────────────────────────────────────────────────┘" + RESET);
+
+                                                            do {// boucle menu passages
+                                                                System.out.println("Choisissez un nombre de passages : ");
+                                                                passages = sc.nextLine();
+                                                                if (!passages.isEmpty() && passages.length()==1) {//condition 1 menu passages
+                                                                    chPassages = passages.charAt(0);
+                                                                    if (chPassages == '1' || chPassages == '2' || chPassages == '3' ||
+                                                                            chPassages == 'q' || chPassages == 'Q') {
+                                                                        break;
+                                                                    }
+                                                                }// fin condition 1 menu passages
+                                                                System.out.println(RED + "Choix invalide" + RESET);
+                                                            } while (true); // fin boucle menu passages
+                                                            // Retourner au menu principal si 'Q' ou 'q' est choisi
+                                                            if (chPassages == 'Q' || chPassages == 'q') {
+                                                                break;
+                                                            }//fin condition
+                                                            //tickets
+                                                            do {
+                                                                System.out.println("Choisissez le nombre de tickets voulus (ou 'q' pour quitter) : ");
+                                                                input = sc.nextLine();
+
+                                                                if (input.equalsIgnoreCase("q")) {
+                                                                    break;
+                                                                }
+
+                                                                boolean estValide = true;
+
+                                                                if (input.isEmpty() || !input.matches("\\d+")) {
+                                                                    estValide = false;
+                                                                } else if (Integer.parseInt(input) <= 0) {
+                                                                    estValide = false;
+                                                                }
+
+                                                                if (estValide) {
+                                                                    tickets = Integer.parseInt(input);
+                                                                    System.out.println("Vous avez choisi : " + tickets + " tickets.");
+                                                                    break;
+                                                                } else {
+                                                                    System.out.println(RED + "Entrée non valide. Veuillez entrer un nombre valide ou 'q' pour quitter." + RESET);
+                                                                }
+                                                            } while (true); // fin de la boucle pour le nombre de tickets
+
+
+                                                            if (input.equalsIgnoreCase("q")) {
+                                                                // Ici, vous pouvez remettre le code pour afficher le menu principal
+                                                                continue; // Retourne au début de la boucle principale
+                                                            }
+
+
+                                                            switch (chPassages) {
+                                                                case '1': // choix pour 1 passage
+
+                                                                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                                                                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                                                                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                                                                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                                                                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                                                                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                                                                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                                                                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                                                                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                                                                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+                                                                    do {// debut boucle réduction
+                                                                        System.out.print("Choisissez le type de réduction :");
+                                                                        reduction = sc.nextLine();
+                                                                        if (!reduction.isEmpty() && reduction.length()==1) {
+                                                                            chReduction = reduction.charAt(0);
+                                                                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                                                                    || chReduction == '3' || chReduction == 'A' || chReduction == 'a') {
+                                                                                break;
+                                                                            }
+                                                                        }// fin condition boucle réduction
+
+                                                                        System.out.println(RED+"Désolé, Nous n’avons pas ce type de choix!"+RESET);
+                                                                    } while (true); // fin boucle réduction
+
+
+
+                                                                    switch (chReduction) {
+                                                                        case '1':// 1 passage et enfant
+                                                                            double prixEnfant = 2.50;
+                                                                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant)*tickets;
+                                                                            double TpsprixEnfant = TPS * prixEnfant;
+                                                                            double TvqprixEnfant = TVQ * prixEnfant;
+                                                                            prixfinal = prixEnfantTaxe;
+                                                                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Enfant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEnfant).replace('.', ',')+ "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEnfantTaxe).replace('.', ',') + "$");
+
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;
+
+                                                                        case '2':// 1 passage et étudiant
+                                                                            double prixEtudiant = 2.50;
+                                                                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant)*tickets;
+                                                                            double TpsprixEtudiant = TPS * prixEtudiant;
+                                                                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                                                                            prixfinal = prixEtudiantTaxe;
+                                                                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Étudiant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 1 passage et étudiant fin
+
+                                                                        case '3':// 1 passage et 65+
+                                                                            double prixAine = 1.00;
+                                                                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine)*tickets;
+                                                                            double TpsprixAine = TPS * prixAine;
+                                                                            double TvqprixAine = TVQ * prixAine;
+                                                                            prixfinal = prixAineTaxe;
+                                                                            System.out.println("En tant que senior, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : 65+");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixAine).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 1 passage et 65+ fin
+
+                                                                        case 'a':
+                                                                        case 'A':
+                                                                            double prixReg = 3.50;// sans remise, donc régulier
+                                                                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg)*tickets;
+                                                                            double TpsprixReg = TPS * prixReg;
+                                                                            double TvqprixReg = TVQ * prixReg;
+                                                                            prixfinal = prixRegTaxe;
+                                                                            System.out.println("Aucune réduction applicable :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : aucune réduction");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixReg).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break; // 1 passage et sans remise fin
+
+
+                                                                    }// fin 1 passage réduction switch
+                                                                    break;// fin choix 1 passage
+
+
+                                                                case '2':// choix pour 2 passages
+
+                                                                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                                                                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                                                                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                                                                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                                                                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                                                                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                                                                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                                                                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                                                                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                                                                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+                                                                    do {// debut boucle réduction
+                                                                        System.out.print("Choisissez le type de réduction : ");
+                                                                        reduction = sc.nextLine();
+                                                                        if (!reduction.isEmpty() && reduction.length()==1) {
+                                                                            chReduction = reduction.charAt(0);
+                                                                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                                                                    || chReduction == '3' || chReduction == 'A' || chReduction == 'a') {
+                                                                                break;
+                                                                            }
+                                                                        }// fin condition boucle réduction
+
+                                                                        System.out.println(RED+"Désolé, Nous n’avons pas ce type de choix!"+RESET);
+                                                                    } while (true); // fin boucle réduction
+
+                                                                    switch (chReduction) {
+                                                                        case '1':// 2 passages et enfant
+                                                                            double prixEnfant = 4.25;
+                                                                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant)*tickets;
+                                                                            double TpsprixEnfant = TPS * prixEnfant;
+                                                                            double TvqprixEnfant = TVQ * prixEnfant;
+                                                                            prixfinal = prixEnfantTaxe;
+                                                                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Enfant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEnfant).replace('.', ',')+ "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEnfantTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et enfant fin
+
+                                                                        case '2':// 2 passages et étudiant
+                                                                            double prixEtudiant = 4.25;
+                                                                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant)*tickets;
+                                                                            double TpsprixEtudiant = TPS * prixEtudiant;
+                                                                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                                                                            prixfinal = prixEtudiantTaxe;
+                                                                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Étudiant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et étudiant fin
+
+                                                                        case '3':// 2 passages et 65+
+                                                                            double prixAine = 2.00;
+                                                                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine)*tickets;
+                                                                            double TpsprixAine = TPS * prixAine;
+                                                                            double TvqprixAine = TVQ * prixAine;
+                                                                            prixfinal = prixAineTaxe;
+                                                                            System.out.println("En tant que senior, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : 65+");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixAine).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et 65+ fin
+
+                                                                        case 'a':
+                                                                        case 'A':
+                                                                            double prixReg = 6.50;// sans remise, donc régulier
+                                                                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg)*tickets;
+                                                                            double TpsprixReg = TPS * prixReg;
+                                                                            double TvqprixReg = TVQ * prixReg;
+                                                                            prixfinal = prixRegTaxe;
+                                                                            System.out.println("Aucune réduction applicable :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : aucune réduction");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixReg).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break; // 2 passages et sans remise fin
+
+                                                                    }// fin 2 passages switch choix reduction
+                                                                    break;// choix 2
+
+                                                                case '3':// choix pour 10 passages
+
+                                                                    System.out.println(GREEN + "┌──────────────────────────────────────────────┐" + RESET);
+                                                                    System.out.println(GREEN + "│              Bienvenue à la STM              │" + RESET);
+                                                                    System.out.println(GREEN + "│         Choisissez votre réduction :         │" + RESET);
+                                                                    System.out.println(GREEN + "├──────────────────────────────────────────────┤" + RESET);
+                                                                    System.out.println(GREEN + "│    1 - Enfant                                │" + RESET);
+                                                                    System.out.println(GREEN + "│    2 - Étudiant                              │" + RESET);
+                                                                    System.out.println(GREEN + "│    3 - +65 ans                               │" + RESET);
+                                                                    System.out.println(GREEN + "│    A - Aucune réduction                      │" + RESET);
+                                                                    System.out.println(RED + "│    Q - Quitter                               │" + RESET);
+                                                                    System.out.println(GREEN + "└──────────────────────────────────────────────┘" + RESET);
+
+                                                                    do {// debut boucle reduction
+                                                                        System.out.print("Choisissez le type de réduction. ");
+                                                                        reduction = sc.nextLine();
+                                                                        if (!reduction.isEmpty() && reduction.length()==1) {
+                                                                            chReduction = reduction.charAt(0);
+                                                                            if (chReduction == '1' || chReduction == 'Q' || chReduction == 'q' || chReduction == '2'
+                                                                                    || chReduction == '3' || chReduction == 'A' || chReduction == 'a') {
+                                                                                break;
+                                                                            }
+                                                                        }// fin condition boucle reduction
+
+                                                                        System.out.println(RED+"Désolé, Nous n’avons pas ce type de choix!"+RESET);
+                                                                    } while (true); // fin boucle reduction
+
+                                                                    switch (chReduction) {
+                                                                        case '1':// 10 passages et enfant
+                                                                            double prixEnfant = 19.00;
+                                                                            double prixEnfantTaxe = ((prixEnfant * TPS) + (prixEnfant * TVQ) + prixEnfant)*tickets;
+                                                                            double TpsprixEnfant = TPS * prixEnfant;
+                                                                            double TvqprixEnfant = TVQ * prixEnfant;
+                                                                            prixfinal = prixEnfantTaxe;
+                                                                            System.out.println("En tant qu'enfant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Enfant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEnfant).replace('.', ',')+ "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEnfant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEnfantTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et enfant fin
+
+                                                                        case '2':// 10 passages et étudiant
+                                                                            double prixEtudiant = 19.00;
+                                                                            double prixEtudiantTaxe = ((prixEtudiant * TPS) + (prixEtudiant * TVQ) + prixEtudiant)*tickets;
+                                                                            double TpsprixEtudiant = TPS * prixEtudiant;
+                                                                            double TvqprixEtudiant = TVQ * prixEtudiant;
+                                                                            prixfinal = prixEtudiantTaxe;
+                                                                            System.out.println("En tant qu'étudiant, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : Étudiant");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et étudiant fin
+
+                                                                        case '3':// 2 passages et 65+
+                                                                            double prixAine = 9.00;
+                                                                            double prixAineTaxe = ((prixAine * TPS) + (prixAine * TVQ) + prixAine)*tickets;
+                                                                            double TpsprixAine = TPS * prixAine;
+                                                                            double TvqprixAine = TVQ * prixAine;
+                                                                            prixfinal = prixAineTaxe;
+                                                                            System.out.println("En tant que senior, voici votre réduction :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : 65+");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixAine).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break;// 2 passages et 65+ fin
+
+                                                                        case 'a':
+                                                                        case 'A':// 10 passages et sans remise
+                                                                            double prixReg = 30.00;// sans remise, donc regulier
+                                                                            double prixRegTaxe = ((prixReg * TPS) + (prixReg * TVQ) + prixReg)*tickets;
+                                                                            double TpsprixReg = TPS * prixReg;
+                                                                            double TvqprixReg = TVQ * prixReg;
+                                                                            prixfinal = prixRegTaxe;
+                                                                            System.out.println("Aucune réduction applicable :");
+                                                                            System.out.println("Type               : 1 passage");
+                                                                            System.out.println("Réduction          : aucune réduction");
+                                                                            System.out.println("Prix à payer       : " + df.format(prixReg).replace('.', ',') + "$");
+                                                                            System.out.println("Nombre de tickets  :  " +tickets);
+                                                                            System.out.println("TPS                : " + df.format(TpsprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
+                                                                            System.out.println("----------------------------------------");
+                                                                            System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+                                                                            while (true) {
+                                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                                // Vérifier si l'utilisateur veut quitter
+                                                                                if (input.equalsIgnoreCase("q")) {
+                                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                                    break; // Sortir de la boucle et quitter
+                                                                                }
+
+                                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                                if (input.isEmpty()) {
+                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                } else {
+                                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                                        char c = input.charAt(i);
+                                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                                            isNumber = false;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    if (isNumber) {
+                                                                                        montantClient = Double.parseDouble(input);
+                                                                                        if (montantClient < prixfinal) {
+                                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                        } else {
+                                                                                            if (montantClient > prixfinal) {
+                                                                                                change = montantClient - prixfinal;
+                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                            } else {
+                                                                                                System.out.println("Il n'y a pas de change.");
+                                                                                            }
+                                                                                            break;
+                                                                                        }
+                                                                                    } else {
+                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                    }
+                                                                                }
+                                                                            }// fin boucle
+
+                                                                            break; // 2 passages et sans remise fin
+
+                                                                    } // fin 10 passages switch reduction
+                                                            }// fin switch passages
+                                                            break; // choix 3
+
+                                                        case 'S':
+                                                        case 's':
+
+                                                            System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+                                                            System.out.println(BLUE + "│              Bienvenue à la STM              │" + RESET);
+                                                            System.out.println(BLUE + "│──────────────────────────────────────────────│" + RESET);
+                                                            System.out.println(BLUE + "│      Soirées : journées ou Fin de semaine    │" + RESET);
+                                                            System.out.println(BLUE + "│    1 -      Soirées illimitées           5$  │" + RESET);
+                                                            System.out.println(BLUE + "│    2 -      1 jour                      10$  │" + RESET);
+                                                            System.out.println(BLUE + "│    3 -      Weekend illimité            14$  │" + RESET);
+                                                            System.out.println(BLUE + "│    4 -      3 jours                     20$  │" + RESET);
+                                                            System.out.println(RED + "│    Q -      Retour au menu principal         │" + RESET);
+                                                            System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+
+                                                            do { // boucle Soirées
+                                                                System.out.println("Choisissez le type de titre : ");
+                                                                Soirees = sc.nextLine();
+                                                                if (!Soirees.isEmpty()&& Soirees.length()==1) {
+                                                                    chSoirees = Soirees.charAt(0);
+                                                                    if (chSoirees == '1' || chSoirees == '2' || chSoirees == '3' || chSoirees == '4'
+                                                                            || chSoirees == 'Q' || chSoirees == 'q') {
+                                                                        break;}
+                                                                }// fin condition
+                                                                System.out.println(RED+"Choix invalide"+RESET);
+                                                            } while (true);// fin boucle soirees menu
+
+                                                            // Retourner au menu principal si 'Q' ou 'q' est choisi
+                                                            if (chSoirees == 'Q' || chSoirees == 'q') {
+                                                                break;
+                                                            }//fin condition
+                                                            //tickets
+                                                            do {
+                                                                System.out.println("Choisissez le nombre de tickets voulus (ou 'q' pour quitter) : ");
+                                                                input = sc.nextLine();
+
+                                                                if (input.equalsIgnoreCase("q")) {
+                                                                    break;
+                                                                }
+
+                                                                boolean estValide = true;
+
+                                                                if (input.isEmpty() || !input.matches("\\d+")) {
+                                                                    estValide = false;
+                                                                } else if (Integer.parseInt(input) <= 0) {
+                                                                    estValide = false;
+                                                                }
+
+                                                                if (estValide) {
+                                                                    tickets = Integer.parseInt(input);
+                                                                    System.out.println("Vous avez choisi : " + tickets + " tickets.");
+                                                                    break;
+                                                                } else {
+                                                                    System.out.println(RED + "Entrée non valide. Veuillez entrer un nombre valide ou 'q' pour quitter." + RESET);
+                                                                }
+                                                            } while (true); // fin de la boucle pour le nombre de tickets
+
+
+                                                            if (input.equalsIgnoreCase("q")) {
+                                                                // Ici, vous pouvez remettre le code pour afficher le menu principal
+                                                                continue; // Retourne au début de la boucle principale
+                                                            }
+                                                            switch (chSoirees) {
+
+                                                                case '1'://choix soirée illimitée
+                                                                    double prixIllimite = 5.00;
+                                                                    double prixIllimiteTaxe = ((prixIllimite * TPS) + (prixIllimite * TVQ) + prixIllimite) * tickets;
+                                                                    double TpsprixIllimite = TPS * prixIllimite;
+                                                                    double TvqprixIllimite = TVQ * prixIllimite;
+                                                                    prixfinal = prixIllimiteTaxe;
+                                                                    System.out.println("Aucune réduction applicable :");
+                                                                    System.out.println("Type               : Soiree Illimitee");
+                                                                    System.out.println("Prix à payer       : " + df.format(prixIllimite).replace('.', ',') + "$");
+                                                                    System.out.println("Nombre de tickets  : " + tickets);
+                                                                    System.out.println("TPS                : " + df.format(TpsprixIllimite).replace('.', ',') + "$");
+                                                                    System.out.println("TVQ                : " + df.format(TvqprixIllimite).replace('.', ',') + "$");
+                                                                    System.out.println("----------------------------------------");
+                                                                    System.out.println("Prix avec taxes    : " + df.format(prixIllimiteTaxe).replace('.', ',') + "$");
+                                                                    while (true) {
+                                                                        System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                        // Vérifier si l'utilisateur veut quitter
+                                                                        if (input.equalsIgnoreCase("q")) {
+                                                                            System.out.println("Vous avez choisi de quitter.");
+                                                                            break; // Sortir de la boucle et quitter
+                                                                        }
+
+                                                                        // Vérifier si l'entrée est vide ou un nombre valide
+                                                                        if (input.isEmpty()) {
+                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                        } else {
+                                                                            boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                            for (int i = 0; i < input.length(); i++) {
+                                                                                char c = input.charAt(i);
+                                                                                if (!Character.isDigit(c) && c != '.') {
+                                                                                    isNumber = false;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            if (isNumber) {
+                                                                                montantClient = Double.parseDouble(input);
+                                                                                if (montantClient < prixfinal) {
+                                                                                    System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                } else {
+                                                                                    if (montantClient > prixfinal) {
+                                                                                        change = montantClient - prixfinal;
+                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                    } else {
+                                                                                        System.out.println("Il n'y a pas de change.");
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            } else {
+                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                            }
+                                                                        }
+                                                                    }// fin boucle
+
+                                                                    break;
+                                                                case '2':// 1 jour soirées
+                                                                    double prix1jour = 10.00;
+                                                                    double prix1jourTaxe = ((prix1jour * TPS) + (prix1jour * TVQ) + prix1jour) * tickets;
+                                                                    double Tpsprix1jour = TPS * prix1jour;
+                                                                    double Tvqprix1jour = TVQ * prix1jour;
+                                                                    prixfinal = prix1jourTaxe;
+                                                                    System.out.println("Aucune réduction applicable :");
+                                                                    System.out.println("Type               : 1 jour");
+                                                                    System.out.println("Prix à payer       : " + df.format(prix1jour).replace('.', ',') + "$");
+                                                                    System.out.println("Nombre de tickets  : " + tickets);
+                                                                    System.out.println("TPS                : " + df.format(Tpsprix1jour).replace('.', ',') + "$");
+                                                                    System.out.println("TVQ                : " + df.format(Tvqprix1jour).replace('.', ',') + "$");
+                                                                    System.out.println("----------------------------------------");
+                                                                    System.out.println("Prix avec taxes    : " + df.format(prix1jourTaxe).replace('.', ',') + "$");
+                                                                    while (true) {
+                                                                        System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                        // Vérifier si l'utilisateur veut quitter
+                                                                        if (input.equalsIgnoreCase("q")) {
+                                                                            System.out.println("Vous avez choisi de quitter.");
+                                                                            break; // Sortir de la boucle et quitter
+                                                                        }
+
+                                                                        // Vérifier si l'entrée est vide ou un nombre valide
+                                                                        if (input.isEmpty()) {
+                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                        } else {
+                                                                            boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                            for (int i = 0; i < input.length(); i++) {
+                                                                                char c = input.charAt(i);
+                                                                                if (!Character.isDigit(c) && c != '.') {
+                                                                                    isNumber = false;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            if (isNumber) {
+                                                                                montantClient = Double.parseDouble(input);
+                                                                                if (montantClient < prixfinal) {
+                                                                                    System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                } else {
+                                                                                    if (montantClient > prixfinal) {
+                                                                                        change = montantClient - prixfinal;
+                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                    } else {
+                                                                                        System.out.println("Il n'y a pas de change.");
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            } else {
+                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                            }
+                                                                        }
+                                                                    }// fin boucle
+
+                                                                    break;
+                                                                case '3'://weekend illimité soirée
+                                                                    double prixweekend = 14.00;
+                                                                    double prixweekendTaxe = ((prixweekend * TPS) + (prixweekend * TVQ) + prixweekend) * tickets;
+                                                                    double Tpsprixweekend = TPS * prixweekend;
+                                                                    double Tvqprixweekend = TVQ * prixweekend;
+                                                                    prixfinal = prixweekendTaxe;
+                                                                    System.out.println("Aucune réduction applicable :");
+                                                                    System.out.println("Type               : weekend illimite");
+                                                                    System.out.println("Prix à payer       : " + df.format(prixweekend).replace('.', ',') + "$");
+                                                                    System.out.println("Nombre de tickets  : " + tickets);
+                                                                    System.out.println("TPS                : " + df.format(Tpsprixweekend).replace('.', ',') + "$");
+                                                                    System.out.println("TVQ                : " + df.format(Tvqprixweekend).replace('.', ',') + "$");
+                                                                    System.out.println("----------------------------------------");
+                                                                    System.out.println("Prix avec taxes    : " + df.format(prixweekendTaxe).replace('.', ',') + "$");
+                                                                    while (true) {
+                                                                        System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                        // Vérifier si l'utilisateur veut quitter
+                                                                        if (input.equalsIgnoreCase("q")) {
+                                                                            System.out.println("Vous avez choisi de quitter.");
+                                                                            break; // Sortir de la boucle et quitter
+                                                                        }
+
+                                                                        // Vérifier si l'entrée est vide ou un nombre valide
+                                                                        if (input.isEmpty()) {
+                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                        } else {
+                                                                            boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                            for (int i = 0; i < input.length(); i++) {
+                                                                                char c = input.charAt(i);
+                                                                                if (!Character.isDigit(c) && c != '.') {
+                                                                                    isNumber = false;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            if (isNumber) {
+                                                                                montantClient = Double.parseDouble(input);
+                                                                                if (montantClient < prixfinal) {
+                                                                                    System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                } else {
+                                                                                    if (montantClient > prixfinal) {
+                                                                                        change = montantClient - prixfinal;
+                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                    } else {
+                                                                                        System.out.println("Il n'y a pas de change.");
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            } else {
+                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                            }
+                                                                        }
+                                                                    }// fin boucle
+
+                                                                    break;
+                                                                case '4':// 3jours soirée
+                                                                    double prix3Jours = 20.00;
+                                                                    double prix3JoursTaxe = ((prix3Jours * TPS) + (prix3Jours * TVQ) + prix3Jours) * tickets;
+                                                                    double Tpsprix3Jours = TPS * prix3Jours;
+                                                                    double Tvqprix3Jours = TVQ * prix3Jours;
+                                                                    prixfinal = prix3JoursTaxe;
+                                                                    System.out.println("Aucune réduction applicable :");
+                                                                    System.out.println("Type               : 3 jours");
+                                                                    System.out.println("Prix à payer       : " + df.format(prix3Jours).replace('.', ',') + "$");
+                                                                    System.out.println("Nombre de tickets  : " + tickets);
+                                                                    System.out.println("TPS                : " + df.format(Tpsprix3Jours).replace('.', ',') + "$");
+                                                                    System.out.println("TVQ                : " + df.format(Tvqprix3Jours).replace('.', ',') + "$");
+                                                                    System.out.println("----------------------------------------");
+                                                                    System.out.println("Prix avec taxes    : " + df.format(prix3JoursTaxe).replace('.', ',') + "$");
+                                                                    while (true) {
+                                                                        System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                        // Vérifier si l'utilisateur veut quitter
+                                                                        if (input.equalsIgnoreCase("q")) {
+                                                                            System.out.println("Vous avez choisi de quitter.");
+                                                                            break; // Sortir de la boucle et quitter
+                                                                        }
+
+                                                                        // Vérifier si l'entrée est vide ou un nombre valide
+                                                                        if (input.isEmpty()) {
+                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                        } else {
+                                                                            boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                            for (int i = 0; i < input.length(); i++) {
+                                                                                char c = input.charAt(i);
+                                                                                if (!Character.isDigit(c) && c != '.') {
+                                                                                    isNumber = false;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            if (isNumber) {
+                                                                                montantClient = Double.parseDouble(input);
+                                                                                if (montantClient < prixfinal) {
+                                                                                    System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                                } else {
+                                                                                    if (montantClient > prixfinal) {
+                                                                                        change = montantClient - prixfinal;
+                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                    } else {
+                                                                                        System.out.println("Il n'y a pas de change.");
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            } else {
+                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                            }
+                                                                        }
+                                                                    }// fin boucle
+
+                                                                    break;
+                                                            }// fin switch soirées
+                                                            break;
+
+                                                        case 'n':// choix navette menu principal
+                                                        case 'N':
+                                                            System.out.println(BLUE + "┌──────────────────────────────────────────────┐" + RESET);
+                                                            System.out.println(BLUE + "│              Bienvenue à la STM              │" + RESET);
+                                                            System.out.println(BLUE + "│──────────────────────────────────────────────│" + RESET);
+                                                            System.out.println(BLUE + "│      Soirées : journées ou Fin de semaine    │" + RESET);
+                                                            System.out.println(BLUE + "│    1 -      Navette               10$        │" + RESET);
+                                                            System.out.println(RED + "│    Q -      Quitter                          │" + RESET);
+                                                            System.out.println(BLUE + "└──────────────────────────────────────────────┘" + RESET);
+
+
+                                                            do { // Boucle Navette
+                                                                System.out.println("Choisissez une option ou quittez : ");
+                                                                navette = sc.nextLine();
+                                                                if (!navette.isEmpty() && navette.length()==1) {
+                                                                    chNavette = navette.charAt(0);
+                                                                    if (chNavette == '1' || chNavette == 'q' || chNavette == 'Q') {
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                System.out.println(RED+"Choix invalide !"+RESET);
+                                                            } while (true);
+
+                                                            // Retourner au menu principal si 'Q' ou 'q' est choisi
+                                                            if (chNavette== 'Q' || chNavette == 'q') {
+                                                                break;
+                                                            }//fin condition
+
+                                                            //tickets
+                                                            do {
+                                                                System.out.println("Choisissez le nombre de tickets voulus (ou 'q' pour quitter) : ");
+                                                                input = sc.nextLine();
+
+                                                                if (input.equalsIgnoreCase("q")) {
+                                                                    break;
+                                                                }
+
+                                                                boolean estValide = true;
+
+                                                                if (input.isEmpty() || !input.matches("\\d+")) {
+                                                                    estValide = false;
+                                                                } else if (Integer.parseInt(input) <= 0) {
+                                                                    estValide = false;
+                                                                }
+
+                                                                if (estValide) {
+                                                                    tickets = Integer.parseInt(input);
+                                                                    System.out.println("Vous avez choisi : " + tickets + " tickets.");
+                                                                    break;
+                                                                } else {
+                                                                    System.out.println(RED + "Entrée non valide. Veuillez entrer un nombre valide ou 'q' pour quitter." + RESET);
+                                                                }
+                                                            } while (true); // fin de la boucle pour le nombre de tickets
+
+
+                                                            if (input.equalsIgnoreCase("q")) {
+                                                                // Ici, vous pouvez remettre le code pour afficher le menu principal
+                                                                continue; // Retourne au début de la boucle principale
+                                                            }
+
+                                                            double prixnavette = 10.00;
+                                                            double prixnavetteTaxe = ((prixnavette * TPS) + (prixnavette * TVQ) + prixnavette) * tickets;
+                                                            double Tpsprixnavette = TPS * prixnavette;
+                                                            double Tvqprixnavette = TVQ * prixnavette;
+                                                            prixfinal = prixnavetteTaxe;
+                                                            System.out.println("Aucune réduction applicable :");
+                                                            System.out.println("Type               : Navette");
+                                                            System.out.println("Prix à payer       : " + df.format(prixnavette).replace('.', ',') + "$");
+                                                            System.out.println("Nombre de tickets  : " + tickets);
+                                                            System.out.println("TPS                : " + df.format(Tpsprixnavette).replace('.', ',') + "$");
+                                                            System.out.println("TVQ                : " + df.format(Tvqprixnavette).replace('.', ',') + "$");
+                                                            System.out.println("----------------------------------------");
+                                                            System.out.println("Prix avec taxes    : " + df.format(prixnavetteTaxe).replace('.', ',') + "$");
+                                                            while (true) {
+                                                                System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
+                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+
+                                                                // Vérifier si l'utilisateur veut quitter
+                                                                if (input.equalsIgnoreCase("q")) {
+                                                                    System.out.println("Vous avez choisi de quitter.");
+                                                                    break; // Sortir de la boucle et quitter
+                                                                }
+
+                                                                // Vérifier si l'entrée est vide ou un nombre valide
+                                                                if (input.isEmpty()) {
+                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                } else {
+                                                                    boolean isNumber = true; // Variable pour vérifier si c'est un nombre
+                                                                    for (int i = 0; i < input.length(); i++) {
+                                                                        char c = input.charAt(i);
+                                                                        if (!Character.isDigit(c) && c != '.') {
+                                                                            isNumber = false;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    if (isNumber) {
+                                                                        montantClient = Double.parseDouble(input);
+                                                                        if (montantClient < prixfinal) {
+                                                                            System.out.println(RED+"Le montant est inférieur au prix d'achat."+RESET);
+
+                                                                        } else {
+                                                                            if (montantClient > prixfinal) {
+                                                                                change = montantClient - prixfinal;
+                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                            } else {
+                                                                        System.out.println("Il n'y a pas de change.");
+                                                                             }
+                                                                        break;
+                                                                                }
+                                                                         } else {
+                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                                                     }
+                                                                        }
+                                                                         }// fin boucle
+
+                                                                        break;
+                                                                         }//fin switch choix titre
+
+            System.out.println(GREEN+"Merci d'avoir voyagé avec la STM !"+RESET);
+            System.out.println(BLUE+"À la prochaine !"+RESET );
+            System.out.println(BLUE+".....:===:                                        \n" +
+                    ".....=++=====.                                    \n" +
+                    " .....:=+++=====.                                 \n" +
+                    "  .....:=++=====:         .-=.                    \n" +
+                    ".....=+++=====.           :==.                    \n" +
+                    ".....=====:    =======. ========.:========-======.\n" +
+                    "             .==-   :==.  -==.   :===. :====  :===\n" +
+                    "             .===-...     -==.   :==:   :==.   -==\n" +
+                    "               :=======.  -==.   :==:   :==.   -==\n" +
+                    "              ..    .===  -==.   :==:   :==.   -==\n" +
+                    "             .===:..:==-  :==-:- :==:   :==.   -==\n" +
+                    "               :======.    .====..==:   :==.   -=="+RESET);
+        }while(true);  // fin boucle menu principal
+
+
+        //FIN
+
+    }//fin psvm
+
+}// fin public class
