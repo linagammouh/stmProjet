@@ -1,6 +1,6 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
- public class TP1 { 
+ public class TP1 {
      //couleurs
      public static final String RESET = "\u001B[0m";
      public static final String BLUE = "\u001B[34m";
@@ -183,17 +183,16 @@ import java.util.Scanner;
 
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -218,7 +217,7 @@ import java.util.Scanner;
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -240,19 +239,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -270,18 +269,17 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
-
                                                                             break;// 1 passage et étudiant fin
 
                                                                         case '3':// 1 passage et 65+
@@ -299,19 +297,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -329,14 +327,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -359,19 +357,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -389,14 +387,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -450,19 +448,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixEnfant).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixEnfantTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -480,18 +478,17 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
-
                                                                             break;// 2 passages et enfant fin
 
                                                                         case '2':// 2 passages et étudiant
@@ -509,19 +506,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -539,14 +536,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -568,19 +565,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -598,14 +595,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -628,19 +625,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -658,18 +655,17 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
-
                                                                             break; // 2 passages et sans remise fin
 
                                                                     }// fin 2 passages switch choix reduction
@@ -718,19 +714,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixEnfant).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixEnfantTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -748,14 +744,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -777,19 +773,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixEtudiant).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixEtudiantTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -807,14 +803,14 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
@@ -836,19 +832,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixAine).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixAineTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -866,18 +862,17 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
-
                                                                             break;// 2 passages et 65+ fin
 
                                                                         case 'a':
@@ -896,19 +891,19 @@ import java.util.Scanner;
                                                                             System.out.println("TVQ                : " + df.format(TvqprixReg).replace('.', ',') + "$");
                                                                             System.out.println("----------------------------------------");
                                                                             System.out.println("Prix avec taxes    : " + df.format(prixRegTaxe).replace('.', ',') + "$");
+
                                                                             while (true) {
                                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                                input = sc.nextLine();
 
                                                                                 // Vérifier si l'utilisateur veut quitter
                                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                                     break; // Sortir de la boucle et quitter
                                                                                 }
 
                                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                                 if (input.isEmpty()) {
-                                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                                 } else {
                                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                                     for (int i = 0; i < input.length(); i++) {
@@ -926,18 +921,17 @@ import java.util.Scanner;
                                                                                         } else {
                                                                                             if (montantClient > prixfinal) {
                                                                                                 change = montantClient - prixfinal;
-                                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                             } else {
                                                                                                 System.out.println("Il n'y a pas de change.");
                                                                                             }
                                                                                             break;
                                                                                         }
                                                                                     } else {
-                                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                                     }
                                                                                 }
                                                                             }// fin boucle
-
                                                                             break; // 2 passages et sans remise fin
 
                                                                     } // fin 10 passages switch reduction
@@ -1021,19 +1015,19 @@ import java.util.Scanner;
                                                                     System.out.println("TVQ                : " + df.format(TvqprixIllimite).replace('.', ',') + "$");
                                                                     System.out.println("----------------------------------------");
                                                                     System.out.println("Prix avec taxes    : " + df.format(prixIllimiteTaxe).replace('.', ',') + "$");
+
                                                                     while (true) {
                                                                         System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                        input = sc.nextLine();
 
                                                                         // Vérifier si l'utilisateur veut quitter
                                                                         if (input.equalsIgnoreCase("q")) {
-                                                                            System.out.println("Vous avez choisi de quitter.");
                                                                             break; // Sortir de la boucle et quitter
                                                                         }
 
                                                                         // Vérifier si l'entrée est vide ou un nombre valide
                                                                         if (input.isEmpty()) {
-                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                            System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                         } else {
                                                                             boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                             for (int i = 0; i < input.length(); i++) {
@@ -1051,19 +1045,19 @@ import java.util.Scanner;
                                                                                 } else {
                                                                                     if (montantClient > prixfinal) {
                                                                                         change = montantClient - prixfinal;
-                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                        System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                     } else {
                                                                                         System.out.println("Il n'y a pas de change.");
                                                                                     }
                                                                                     break;
                                                                                 }
                                                                             } else {
-                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                             }
                                                                         }
                                                                     }// fin boucle
-
                                                                     break;
+
                                                                 case '2':// 1 jour soirées
                                                                     double prix1jour = 10.00;
                                                                     double prix1jourTaxe = ((prix1jour * TPS) + (prix1jour * TVQ) + prix1jour) * tickets;
@@ -1078,19 +1072,19 @@ import java.util.Scanner;
                                                                     System.out.println("TVQ                : " + df.format(Tvqprix1jour).replace('.', ',') + "$");
                                                                     System.out.println("----------------------------------------");
                                                                     System.out.println("Prix avec taxes    : " + df.format(prix1jourTaxe).replace('.', ',') + "$");
+
                                                                     while (true) {
                                                                         System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                        input = sc.nextLine();
 
                                                                         // Vérifier si l'utilisateur veut quitter
                                                                         if (input.equalsIgnoreCase("q")) {
-                                                                            System.out.println("Vous avez choisi de quitter.");
                                                                             break; // Sortir de la boucle et quitter
                                                                         }
 
                                                                         // Vérifier si l'entrée est vide ou un nombre valide
                                                                         if (input.isEmpty()) {
-                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                            System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                         } else {
                                                                             boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                             for (int i = 0; i < input.length(); i++) {
@@ -1108,14 +1102,14 @@ import java.util.Scanner;
                                                                                 } else {
                                                                                     if (montantClient > prixfinal) {
                                                                                         change = montantClient - prixfinal;
-                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                        System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                     } else {
                                                                                         System.out.println("Il n'y a pas de change.");
                                                                                     }
                                                                                     break;
                                                                                 }
                                                                             } else {
-                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                             }
                                                                         }
                                                                     }// fin boucle
@@ -1135,19 +1129,19 @@ import java.util.Scanner;
                                                                     System.out.println("TVQ                : " + df.format(Tvqprixweekend).replace('.', ',') + "$");
                                                                     System.out.println("----------------------------------------");
                                                                     System.out.println("Prix avec taxes    : " + df.format(prixweekendTaxe).replace('.', ',') + "$");
+
                                                                     while (true) {
                                                                         System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                        input = sc.nextLine();
 
                                                                         // Vérifier si l'utilisateur veut quitter
                                                                         if (input.equalsIgnoreCase("q")) {
-                                                                            System.out.println("Vous avez choisi de quitter.");
                                                                             break; // Sortir de la boucle et quitter
                                                                         }
 
                                                                         // Vérifier si l'entrée est vide ou un nombre valide
                                                                         if (input.isEmpty()) {
-                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                            System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                         } else {
                                                                             boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                             for (int i = 0; i < input.length(); i++) {
@@ -1165,14 +1159,14 @@ import java.util.Scanner;
                                                                                 } else {
                                                                                     if (montantClient > prixfinal) {
                                                                                         change = montantClient - prixfinal;
-                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                        System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                     } else {
                                                                                         System.out.println("Il n'y a pas de change.");
                                                                                     }
                                                                                     break;
                                                                                 }
                                                                             } else {
-                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                             }
                                                                         }
                                                                     }// fin boucle
@@ -1192,19 +1186,19 @@ import java.util.Scanner;
                                                                     System.out.println("TVQ                : " + df.format(Tvqprix3Jours).replace('.', ',') + "$");
                                                                     System.out.println("----------------------------------------");
                                                                     System.out.println("Prix avec taxes    : " + df.format(prix3JoursTaxe).replace('.', ',') + "$");
+
                                                                     while (true) {
                                                                         System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                        input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                        input = sc.nextLine();
 
                                                                         // Vérifier si l'utilisateur veut quitter
                                                                         if (input.equalsIgnoreCase("q")) {
-                                                                            System.out.println("Vous avez choisi de quitter.");
                                                                             break; // Sortir de la boucle et quitter
                                                                         }
 
                                                                         // Vérifier si l'entrée est vide ou un nombre valide
                                                                         if (input.isEmpty()) {
-                                                                            System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                            System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                         } else {
                                                                             boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                             for (int i = 0; i < input.length(); i++) {
@@ -1222,14 +1216,14 @@ import java.util.Scanner;
                                                                                 } else {
                                                                                     if (montantClient > prixfinal) {
                                                                                         change = montantClient - prixfinal;
-                                                                                        System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                        System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                                     } else {
                                                                                         System.out.println("Il n'y a pas de change.");
                                                                                     }
                                                                                     break;
                                                                                 }
                                                                             } else {
-                                                                                System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
+                                                                                System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
                                                                             }
                                                                         }
                                                                     }// fin boucle
@@ -1311,19 +1305,19 @@ import java.util.Scanner;
                                                             System.out.println("TVQ                : " + df.format(Tvqprixnavette).replace('.', ',') + "$");
                                                             System.out.println("----------------------------------------");
                                                             System.out.println("Prix avec taxes    : " + df.format(prixnavetteTaxe).replace('.', ',') + "$");
+
                                                             while (true) {
                                                                 System.out.println("Veuillez saisir votre montant d'argent (ou 'q'/'Q' pour quitter) :");
-                                                                input = sc.nextLine(); // Lire l'entrée utilisateur
+                                                                input = sc.nextLine();
 
                                                                 // Vérifier si l'utilisateur veut quitter
                                                                 if (input.equalsIgnoreCase("q")) {
-                                                                    System.out.println("Vous avez choisi de quitter.");
                                                                     break; // Sortir de la boucle et quitter
                                                                 }
 
                                                                 // Vérifier si l'entrée est vide ou un nombre valide
                                                                 if (input.isEmpty()) {
-                                                                    System.out.println("Veuillez entrer un montant valide ou 'q' pour quitter.");
+                                                                    System.out.println(RED+"Erreur ! espace vide !"+RESET);
                                                                 } else {
                                                                     boolean isNumber = true; // Variable pour vérifier si c'est un nombre
                                                                     for (int i = 0; i < input.length(); i++) {
@@ -1341,17 +1335,17 @@ import java.util.Scanner;
                                                                         } else {
                                                                             if (montantClient > prixfinal) {
                                                                                 change = montantClient - prixfinal;
-                                                                                System.out.println("Votre change est de " + df.format(change).replace('.', ',') + " $");
+                                                                                System.out.println("Votre change est de "+ df.format(change).replace('.', ',') + " $");
                                                                             } else {
-                                                                        System.out.println("Il n'y a pas de change.");
-                                                                             }
-                                                                        break;
-                                                                                }
-                                                                         } else {
-                                                                        System.out.println(RED+"Entrée non valide. Veuillez entrer un montant valide ou 'q' pour quitter."+RESET);
-                                                                                                                     }
+                                                                                System.out.println("Il n'y a pas de change.");
+                                                                            }
+                                                                            break;
                                                                         }
-                                                                         }// fin boucle
+                                                                    } else {
+                                                                        System.out.println(RED+"Erreur ! Entrez un montant valide."+RESET);
+                                                                    }
+                                                                }
+                                                            }// fin boucle
 
                                                                         break;
                                                                          }//fin switch choix titre
@@ -1378,3 +1372,4 @@ import java.util.Scanner;
     }//fin psvm
 
 }// fin public class
+
